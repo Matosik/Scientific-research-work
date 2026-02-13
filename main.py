@@ -2,8 +2,7 @@ import cv2
 import numpy as np
 from pathlib import Path
 from tools import *
-from microcredit.geom.geom_model import RegistrationModule
-from microcredit.read_data import ReadData
+from read_data import ReadData
 
 def downscale(img, scale=0.5, method=cv2.INTER_AREA):
     h, w = img.shape[:2]
@@ -51,18 +50,12 @@ def synthetics_main():
     path_series = "dataset/synthetics/series frames/"
 
     generate_synthetics(path_base_frame,count_frames=30, path_series=path_series)
-    #cv2.imwrite(f"{path_align}/align_frame_0.png", images[0])
-    #for i in range(1, len(images)):
-    #    M, warped, warped_err, dbg = align_images(images[0], images[i])
-    #    cv2.imwrite(f"{path_align}/align_frame_{i}.png", warped)
 
 
 def registration_main():
     path_series = "dataset/synthetics/series frames/"
-    data = ReadData(path_series)             # ✅ data.images -> list[np.ndarray]
+    data = ReadData(path_series)             # data.images -> list[np.ndarray]
 
-    geom_model = RegistrationModule(image=data, increase=30)
-    geom_model.registration()
     
     
 
