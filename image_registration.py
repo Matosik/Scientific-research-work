@@ -23,7 +23,7 @@
     [ALL]   to_grayscale()            — конвертация в grayscale
     [ALL]   extract_transform_params() — извлечение параметров из матрицы
 """
-
+import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 from typing import Tuple, Optional, Literal
@@ -659,4 +659,34 @@ def extract_transform_params(matrix: np.ndarray, is_homography: bool) -> dict:
     
     return params
 
+def save_metric_plots(mse_before, mse_after,
+                      ncc_before, ncc_after,
+                      path_dataset):
+
+    x = np.arange(len(mse_before))
+
+    # --- MSE ---
+    plt.figure(figsize=(8,5))
+    
+    plt.plot(x, mse_before, label="MSE Before")
+    plt.plot(x, mse_after, label="MSE After")
+    plt.xlabel("Frame Index")
+    plt.ylabel("MSE")
+    plt.title("MSE Before vs After ECC")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(f"{path_dataset}/mse_plot.png")
+    plt.close()
+
+    # --- NCC ---
+    plt.figure(figsize=(8,5))
+    plt.plot(x, ncc_before, label="NCC Before")
+    plt.plot(x, ncc_after, label="NCC After")
+    plt.xlabel("Frame Index")
+    plt.ylabel("NCC")
+    plt.title("NCC Before vs After ECC")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(f"{path_dataset}/ncc_plot.png")
+    plt.close()
 
