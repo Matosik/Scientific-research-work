@@ -62,7 +62,6 @@ def registration_main(path_dataset = "dataset/synthetics", save_metric=False):
     
 
 
-
 if(__name__ =="__main__"):
     synthetics_main()
     registration_main()

@@ -1,0 +1,8 @@
+numpy
+opencv-python
+matplotlib
+scikit-image
+torch
+tqdm
+super-image
+jupyter
